@@ -1,0 +1,49 @@
+
+Conditional Statements in PHP:
+* if/else 
+Useful for group and ungroup data
+* switch 
+Only for single group (variable/ expression)
+
+
+
+
+Example: If/else statement  in PHP
+* <?php
+$a = 20;
+$b=20;
+if ($a < $b) 
+{
+  echo “a<b";
+}
+else if ($a > $b) 
+{
+  echo “a>b";
+}
+else
+{
+Echo “a equals b”;
+}
+
+?>
+________________
+
+
+Example: Switch statement  in PHP
+   * <?php
+$favcolor = “green";
+
+switch ($favcolor) {
+  case "red":
+    echo "Your favorite color is red!";
+    break;
+  case "blue":
+    echo "Your favorite color is blue!";
+    break;
+  case "green":
+    echo "Your favorite color is green!";
+    break;
+  default:
+    echo "Your favorite color is neither red, blue, nor green!";
+}
+?>

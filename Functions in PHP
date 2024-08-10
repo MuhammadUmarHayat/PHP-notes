@@ -1,0 +1,21 @@
+Functions in PHP
+            * Do a specific task
+            * Example1: string function
+<?php
+//define a function
+function printFn ($name , $address) 
+{
+   echo  $name. $address;
+}
+
+//calling
+printFn (“Umar” , “Lahore”) ;
+
+?>
+            * Example2: integer function
+<?php declare(strict_types=1); // strict requirement
+function sum (int $a, int $b) {
+  return $a + $b;
+}
+echo sum(5, 6); 
+?>

@@ -1,0 +1,52 @@
+
+PHP Array:
+
+
+* Collections of elements which has same type
+<?php
+$name = array(“Umar", “Ali“ , “Amir");//group
+$age=array(10,20,30);//group
+
+echo $name[0];  //fetching the first element
+?>
+<?php
+$name = array (“Umar", “Ali“ , “Amir");
+var_dump($name);  //fetching all elements
+
+?>
+
+PHP Associative Arrays: Associative arrays are arrays that use named keys that you assign to them
+$car = array("brand"=>"Ford", "model"=>"Mustang", "year"=>1964);
+var_dump($car);
+$car["year"] = 2024;//change the value
+echo $car["model"];//accessing the element
+
+//fetch all element
+$car = array("brand"=>"Ford", "model"=>"Mustang", "year"=>1964);
+
+foreach ($car as $x => $y) 
+{
+  echo "$x: $y <br>";
+}
+
+PHP - Two-dimensional Arrays
+A two-dimensional array is an array of arrays (a three-dimensional array is an array of arrays of arrays).
+$cars = array (
+  array("Volvo",22,18),
+  array("BMW",15,13),
+  array("Saab",5,2),
+  array("Land Rover",17,15)
+);
+//fetch all element
+for ($row = 0; $row < 4; $row++) 
+{
+  echo "<p><b>Row number $row</b></p>";
+  echo "<ul>";
+    for ($col = 0; $col < 3; $col++) {
+      echo "<li>".$cars[$row][$col]."</li>";
+    }
+  echo "</ul>";
+}
+
+
+
