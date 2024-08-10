@@ -1,0 +1,45 @@
+     * Used for repetition
+Types
+
+ 1. index basedloops
+      * while  //starting , ending, increment or decrement
+      * do while //starting , ending, increment or decrement
+      * for //starting , ending, increment or decrement
+2.Item based
+      * foreach
+While loop in PHP://minimum execution =0
+      * <?php
+$a = 1;
+
+while($a <= 05) 
+{
+  echo “ The number is: $a  <br>";
+  $a++;
+}
+?>
+________________
+
+
+Do while loop: Min Execution=1
+         * <?php
+$a = 1;
+
+do {
+  echo "The number is: $a <br>";
+  $a++;
+} while ($a <= 5);
+?>
+For loop in PHP:
+<?php
+for ($a = 0; $a <= 10; $a++) {
+  echo "The number is: $a <br>";
+}
+?>
+Foreach loop in PHP:
+<?php
+$names = array(“Ali", “Umar", “Ubaid", “Momal");
+foreach ($ names  as   $item)
+ {
+  echo "$item <br>";  //print item of names
+}
+?>
