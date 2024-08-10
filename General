@@ -1,0 +1,45 @@
+What is PHP
+PHP is an acronym for "PHP: Hypertext Preprocessor"
+PHP is a server-side scripting language to develop interactive and dynamic web applications
+PHP is a loosely type language
+PHP is a widely-used, open-source language
+Extension of PHP file is .php
+Points to Remember:
+PHP is a case sensitive language
+Each statement ends with a semicolon (;)
+Each keyword starting from small letter
+Support single line or multiline comments
+// single line comments
+/*
+Multi line comments
+*/
+The dot(.) operator is used to concatenate the strings.
+
+
+PHP Syntax:
+<?php
+// PHP code 
+?>
+Example 
+  <!DOCTYPEÂ html><html><body>
+  <h1>My first PHP page</h1>
+<?php
+
+
+echo "Php code here !";
+
+
+      ?>
+</body>
+Variables: Holds the data
+
+
+<?php
+$name = “Umar Hayat!";
+$a =5; 
+$b = 10.5;
+
+
+ echo “My name is ”. $name ;
+
+?>
