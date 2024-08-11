@@ -43,3 +43,4 @@ $b = 10.5;
  echo “My name is ”. $name ;
 
 ?>
+Navigation from current page to an other: header('Location:http://localhost/eyecare/admin/index.php');
