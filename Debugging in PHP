@@ -1,0 +1,75 @@
+PHP provides several built-in functions and techniques for debugging. Here are some of the most commonly used debugging functions:
+
+### 1. `var_dump()`
+- **Usage:** Displays structured information (type and value) about one or more variables. Arrays and objects are explored recursively.
+- **Example:**
+  ```php
+  $variable = array("name" => "John", "age" => 25);
+  var_dump($variable);
+  ```
+
+### 2. `print_r()`
+- **Usage:** Prints human-readable information about a variable. Typically used for arrays and objects.
+- **Example:**
+  ```php
+  $array = array("apple", "orange", "banana");
+  print_r($array);
+  ```
+- **Note:** `print_r()` does not display the type of variable, making it less detailed than `var_dump()`.
+
+### 3. `echo` and `print`
+- **Usage:** Simple functions for outputting strings and other scalar data types. `echo` is slightly faster and can take multiple parameters.
+- **Example:**
+  ```php
+  echo "Debugging output: ", $variable;
+  ```
+
+### 4. `debug_backtrace()`
+- **Usage:** Generates a backtrace, which is an array of the function calls that lead to the current point of execution. Useful for tracking down where a particular piece of code was executed.
+- **Example:**
+  ```php
+  function test() {
+      var_dump(debug_backtrace());
+  }
+  test();
+  ```
+
+### 5. `error_reporting()`
+- **Usage:** Sets which PHP errors are reported. You can use it to display all errors or only specific types.
+- **Example:**
+  ```php
+  error_reporting(E_ALL); // Reports all errors, warnings, and notices
+  ```
+
+### 6. `ini_set()`
+- **Usage:** Overrides the configuration file (php.ini) settings at runtime. Useful for enabling or disabling specific debugging settings.
+- **Example:**
+  ```php
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+  ```
+
+### 7. `die()` or `exit()`
+- **Usage:** Outputs a message and terminates the script. This can be used to stop execution at a certain point in the script to check the output up to that point.
+- **Example:**
+  ```php
+  die("Script terminated");
+  ```
+
+### 8. `assert()`
+- **Usage:** Checks if a condition is true, and if not, it outputs an error. It's useful for sanity checks in your code.
+- **Example:**
+  ```php
+  assert($value > 0, "Value must be greater than zero");
+  ```
+
+### 9. `xdebug`
+- **Usage:** Xdebug is an extension for PHP that provides more advanced debugging capabilities, such as stack traces, breakpoints, and code coverage analysis. To use Xdebug, you need to install and configure it in your PHP environment.
+- **Example:**
+  ```php
+  // Xdebug provides functionality for breakpoints, stack traces, etc.
+  xdebug_info(); // Outputs Xdebug configuration and environment details
+  ```
+
+These tools can be very effective in identifying and resolving issues in your PHP code.
