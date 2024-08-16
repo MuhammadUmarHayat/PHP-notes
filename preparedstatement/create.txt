@@ -1,0 +1,22 @@
+<?php
+function createProduct($conn, $title, $price, $photo) {
+    $sql = "INSERT INTO products (title, price, photo) VALUES (:title, :price, :photo)";
+    $stmt = $conn->prepare($sql);
+    
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':price', $price);
+    $stmt->bindParam(':photo', $photo, PDO::PARAM_LOB);
+    
+    if ($stmt->execute()) {
+        echo "New product created successfully";
+    } else {
+        echo "Error creating product";
+    }
+}
+
+// Example usage:
+$title = "Product Name";
+$price = 100;
+$photo = file_get_contents('path_to_image.jpg');
+createProduct($conn, $title, $price, $photo);
+?>

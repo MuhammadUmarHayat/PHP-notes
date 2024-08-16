@@ -1,0 +1,17 @@
+
+CREATE TABLE `products` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `price` int(12) NOT NULL,
+  `photo` longblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);

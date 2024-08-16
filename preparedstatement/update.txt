@@ -1,0 +1,32 @@
+<?php
+function updateProduct($conn, $id, $title, $price, $photo = null) {
+    if ($photo) {
+        $sql = "UPDATE products SET title = :title, price = :price, photo = :photo WHERE id = :id";
+    } else {
+        $sql = "UPDATE products SET title = :title, price = :price WHERE id = :id";
+    }
+    
+    $stmt = $conn->prepare($sql);
+    
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':price', $price);
+    $stmt->bindParam(':id', $id);
+    
+    if ($photo) {
+        $stmt->bindParam(':photo', $photo, PDO::PARAM_LOB);
+    }
+    
+    if ($stmt->execute()) {
+        echo "Product updated successfully";
+    } else {
+        echo "Error updating product";
+    }
+}
+
+// Example usage:
+$id = 1; // ID of the product to update
+$title = "Updated Product Name";
+$price = 150;
+$photo = file_get_contents('path_to_image.jpg'); // Optional
+updateProduct($conn, $id, $title, $price, $photo);
+?>

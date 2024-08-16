@@ -1,0 +1,34 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "your_database_name"; // Replace with your database name
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Create
+    $title = "Product Name";
+    $price = 100;
+    $photo = file_get_contents('path_to_image.jpg');
+    createProduct($conn, $title, $price, $photo);
+    
+    // Read
+    readProducts($conn);
+    
+    // Update
+    $id = 1; // ID of the product to update
+    $title = "Updated Product Name";
+    $price = 150;
+    $photo = file_get_contents('path_to_image.jpg'); // Optional
+    updateProduct($conn, $id, $title, $price, $photo);
+    
+    // Delete
+    $id = 1; // ID of the product to delete
+    deleteProduct($conn, $id);
+    
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+?>
