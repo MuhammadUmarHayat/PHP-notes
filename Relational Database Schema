@@ -1,0 +1,142 @@
+Creating a relational database schema for a Doctor-Patient Appointment web application involves defining tables for storing information about doctors, patients, appointments,
+  and possibly other related entities like specialties, schedules, and more. Below is a basic schema that you can build upon.
+
+### Database Schema
+
+#### 1. `doctors` Table
+
+This table stores information about doctors.
+
+```sql
+CREATE TABLE doctors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    specialty_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (specialty_id) REFERENCES specialties(id)
+);
+```
+
+#### 2. `patients` Table
+
+This table stores information about patients.
+
+```sql
+CREATE TABLE patients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    date_of_birth DATE,
+    gender ENUM('Male', 'Female', 'Other'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+#### 3. `appointments` Table
+
+This table stores appointment information between doctors and patients.
+
+```sql
+CREATE TABLE appointments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_id INT NOT NULL,
+    patient_id INT NOT NULL,
+    appointment_date DATETIME NOT NULL,
+    status ENUM('Scheduled', 'Completed', 'Cancelled') DEFAULT 'Scheduled',
+    reason VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id),
+    FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+```
+
+#### 4. `specialties` Table
+
+This table stores the different specialties that doctors can have.
+
+```sql
+CREATE TABLE specialties (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+#### 5. `schedules` Table
+
+This table stores the availability schedule for each doctor.
+
+```sql
+CREATE TABLE schedules (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    doctor_id INT NOT NULL,
+    day_of_week ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id)
+);
+```
+
+#### 6. `users` Table (Optional)
+
+If your application has a user login system, this table will store user credentials. The role field can determine if the user is a doctor, patient, or admin.
+
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('Doctor', 'Patient', 'Admin') NOT NULL,
+    doctor_id INT NULL,
+    patient_id INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id),
+    FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+```
+
+### Entity Relationships
+
+- **Doctors & Specialties**: A doctor can have one specialty, and a specialty can be associated with multiple doctors (one-to-many relationship).
+- **Doctors & Appointments**: A doctor can have many appointments, but each appointment is associated with one doctor (one-to-many relationship).
+- **Patients & Appointments**: A patient can have many appointments, but each appointment is associated with one patient (one-to-many relationship).
+- **Doctors & Schedules**: A doctor can have many schedules, but each schedule is associated with one doctor (one-to-many relationship).
+
+### Example Queries
+
+1. **Insert a new doctor**:
+
+```sql
+INSERT INTO doctors (first_name, last_name, email, phone, specialty_id) 
+VALUES ('John', 'Doe', 'john.doe@example.com', '123-456-7890', 1);
+```
+
+2. **Schedule a new appointment**:
+
+```sql
+INSERT INTO appointments (doctor_id, patient_id, appointment_date, reason) 
+VALUES (1, 1, '2024-08-20 10:00:00', 'Routine Checkup');
+```
+
+3. **Get all appointments for a specific doctor**:
+
+```sql
+SELECT a.id, p.first_name, p.last_name, a.appointment_date, a.status 
+FROM appointments a 
+JOIN patients p ON a.patient_id = p.id 
+WHERE a.doctor_id = 1;
+```
+
+This schema should provide a solid foundation for developing a Doctor-Patient Appointment web application. You can expand this by adding more fields or tables as needed, such as for storing payment information, medical records, etc.
