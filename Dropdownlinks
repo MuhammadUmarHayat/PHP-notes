@@ -1,0 +1,14 @@
+<select name="patient_id" class="form-control">
+    <option disabled selected>-- Select Patient --</option>
+    <option value="new_patient">Add New Patient</option>
+    <option value="patient_history">View Patient History</option>
+</select>
+<script>
+    document.querySelector('select[name="patient_id"]').addEventListener('change', function () {
+        if (this.value === 'new_patient') {
+            window.location.href = 'add_patient_record.php';
+        } else if (this.value === 'patient_history') {
+            window.location.href = 'patient_history.php';
+        }
+    });
+</script>
